@@ -17,7 +17,7 @@
 		<!-- Slick plugin -->
 
 		<link rel="stylesheet" type="text/css" href="/resources/plugins/slick/slick.css"/>
-		
+
 		<link rel="stylesheet" type="text/css" href="/resources/plugins/slick/slick-theme.css"/>
 
 		<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -27,254 +27,241 @@
 		<![endif]-->
 
 	</head>
-	
-	
-	
-	<style>
-		
-		
-		
-	</style>
 
-	<%= yield %>
+	<body id="<%= @viewID %>">
 
-	<!-- ============ FOOTER START ============ -->
+		<%= yield %>
 
-	<footer>
-		<div id="prefooter">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6" id="newsletter">
-						<h2>Newsletter</h2>
-						<form class="form-inline">
-							<div class="form-group">
-								<label class="sr-only" for="newsletter-email">Email address</label>
-								<input type="email" class="form-control" id="newsletter-email" placeholder="Email address">
-							</div>
-							<button type="submit" class="btn btn-primary">
-								Sign up
-							</button>
-						</form>
-					</div>
-					<div class="col-sm-6" id="social-networks">
-						<h2>Get in touch</h2>
-						<a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-google-plus-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-youtube-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-vimeo-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-pinterest-square"></i></a>
-						<a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
+		<!-- ============ FOOTER START ============ -->
+
+		<footer>
+			<div id="prefooter">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6" id="newsletter">
+							<h2>Newsletter</h2>
+							<form class="form-inline">
+								<div class="form-group">
+									<label class="sr-only" for="newsletter-email">Email address</label>
+									<input type="email" class="form-control" id="newsletter-email" placeholder="Email address">
+								</div>
+								<button type="submit" class="btn btn-primary">
+									Sign up
+								</button>
+							</form>
+						</div>
+						<div class="col-sm-6" id="social-networks">
+							<h2>Get in touch</h2>
+							<a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-google-plus-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-youtube-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-vimeo-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-pinterest-square"></i></a>
+							<a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="credits">
-			<div class="container text-center">
-				<div class="row">
-					<div class="col-sm-12">
-						&copy; 2015 Jobseek - Responsive Job Board HTML Template
-						<br>
-						Designed &amp; Developed by <a href="http://themeforest.net/user/Coffeecream" target="_blank">Coffeecream Themes</a>
+			<div id="credits">
+				<div class="container text-center">
+					<div class="row">
+						<div class="col-sm-12">
+							&copy; 2015 Jobseek - Responsive Job Board HTML Template
+							<br>
+							Designed &amp; Developed by <a href="http://themeforest.net/user/Coffeecream" target="_blank">Coffeecream Themes</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</footer>
+		</footer>
 
-	<!-- ============ FOOTER END ============ -->
+		<!-- ============ FOOTER END ============ -->
 
-	<!-- ============ LOGIN START ============ -->
+		<!-- ============ LOGIN START ============ -->
 
-	<div class="popup" id="login">
-		<div class="popup-form">
-			<div class="popup-header">
-				<a class="close"><i class="fa fa-remove fa-lg"></i></a>
-				<h2>Login</h2>
+		<div class="popup" id="login">
+			<div class="popup-form">
+				<div class="popup-header">
+					<a class="close"><i class="fa fa-remove fa-lg"></i></a>
+					<h2>Login</h2>
+				</div>
+				<form>
+					<ul class="social-login">
+						<li>
+							<a class="btn btn-facebook"><i class="fa fa-facebook"></i>Sign In with Facebook</a>
+						</li>
+						<li>
+							<a class="btn btn-google"><i class="fa fa-google-plus"></i>Sign In with Google</a>
+						</li>
+						<li>
+							<a class="btn btn-linkedin"><i class="fa fa-linkedin"></i>Sign In with LinkedIn</a>
+						</li>
+					</ul>
+					<hr>
+					<div class="form-group">
+						<label for="login-username">Username</label>
+						<input type="text" class="form-control" id="login-username">
+					</div>
+					<div class="form-group">
+						<label for="login-password">Password</label>
+						<input type="password" class="form-control" id="login-password">
+					</div>
+					<button type="submit" class="btn btn-primary">
+						Sign In
+					</button>
+				</form>
 			</div>
-			<form>
-				<ul class="social-login">
-					<li>
-						<a class="btn btn-facebook"><i class="fa fa-facebook"></i>Sign In with Facebook</a>
-					</li>
-					<li>
-						<a class="btn btn-google"><i class="fa fa-google-plus"></i>Sign In with Google</a>
-					</li>
-					<li>
-						<a class="btn btn-linkedin"><i class="fa fa-linkedin"></i>Sign In with LinkedIn</a>
-					</li>
-				</ul>
-				<hr>
-				<div class="form-group">
-					<label for="login-username">Username</label>
-					<input type="text" class="form-control" id="login-username">
-				</div>
-				<div class="form-group">
-					<label for="login-password">Password</label>
-					<input type="password" class="form-control" id="login-password">
-				</div>
-				<button type="submit" class="btn btn-primary">
-					Sign In
-				</button>
-			</form>
 		</div>
-	</div>
 
-	<!-- ============ LOGIN END ============ -->
+		<!-- ============ LOGIN END ============ -->
 
-	<!-- ============ REGISTER START ============ -->
+		<!-- ============ REGISTER START ============ -->
 
-	<div class="popup" id="register">
-		<div class="popup-form">
-			<div class="popup-header">
-				<a class="close"><i class="fa fa-remove fa-lg"></i></a>
-				<h2>Register</h2>
+		<div class="popup" id="register">
+			<div class="popup-form">
+				<div class="popup-header">
+					<a class="close"><i class="fa fa-remove fa-lg"></i></a>
+					<h2>Register</h2>
+				</div>
+				<form>
+					<ul class="social-login">
+						<li>
+							<a class="btn btn-facebook"><i class="fa fa-facebook"></i>Register with Facebook</a>
+						</li>
+						<li>
+							<a class="btn btn-google"><i class="fa fa-google-plus"></i>Register with Google</a>
+						</li>
+						<li>
+							<a class="btn btn-linkedin"><i class="fa fa-linkedin"></i>Register with LinkedIn</a>
+						</li>
+					</ul>
+					<hr>
+					<div class="form-group">
+						<label for="register-name">Name</label>
+						<input type="text" class="form-control" id="register-name">
+					</div>
+					<div class="form-group">
+						<label for="register-surname">Surname</label>
+						<input type="text" class="form-control" id="register-surname">
+					</div>
+					<div class="form-group">
+						<label for="register-email">Email</label>
+						<input type="email" class="form-control" id="register-email">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="register-username">Username</label>
+						<input type="text" class="form-control" id="register-username">
+					</div>
+					<div class="form-group">
+						<label for="register-password1">Password</label>
+						<input type="password" class="form-control" id="register-password1">
+					</div>
+					<div class="form-group">
+						<label for="register-password2">Repeat Password</label>
+						<input type="password" class="form-control" id="register-password2">
+					</div>
+					<button type="submit" class="btn btn-primary">
+						Register
+					</button>
+				</form>
 			</div>
-			<form>
-				<ul class="social-login">
-					<li>
-						<a class="btn btn-facebook"><i class="fa fa-facebook"></i>Register with Facebook</a>
-					</li>
-					<li>
-						<a class="btn btn-google"><i class="fa fa-google-plus"></i>Register with Google</a>
-					</li>
-					<li>
-						<a class="btn btn-linkedin"><i class="fa fa-linkedin"></i>Register with LinkedIn</a>
-					</li>
-				</ul>
-				<hr>
-				<div class="form-group">
-					<label for="register-name">Name</label>
-					<input type="text" class="form-control" id="register-name">
-				</div>
-				<div class="form-group">
-					<label for="register-surname">Surname</label>
-					<input type="text" class="form-control" id="register-surname">
-				</div>
-				<div class="form-group">
-					<label for="register-email">Email</label>
-					<input type="email" class="form-control" id="register-email">
-				</div>
-				<hr>
-				<div class="form-group">
-					<label for="register-username">Username</label>
-					<input type="text" class="form-control" id="register-username">
-				</div>
-				<div class="form-group">
-					<label for="register-password1">Password</label>
-					<input type="password" class="form-control" id="register-password1">
-				</div>
-				<div class="form-group">
-					<label for="register-password2">Repeat Password</label>
-					<input type="password" class="form-control" id="register-password2">
-				</div>
-				<button type="submit" class="btn btn-primary">
-					Register
-				</button>
-			</form>
 		</div>
-	</div>
 
-	<!-- ============ REGISTER END ============ -->
+		<!-- ============ REGISTER END ============ -->
 
-	<!-- Modernizr Plugin -->
-	<script src="/resources/js/modernizr.custom.79639.js"></script>
+		<!-- Modernizr Plugin -->
+		<script src="/resources/js/modernizr.custom.79639.js"></script>
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="/resources/js/jquery-1.11.2.min.js"></script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="/resources/js/jquery-1.11.2.min.js"></script>
 
-	<!-- Bootstrap Plugins -->
-	<script src="/resources/js/bootstrap.min.js"></script>
+		<!-- Bootstrap Plugins -->
+		<script src="/resources/js/bootstrap.min.js"></script>
 
-	<!-- Retina Plugin -->
-	<script src="/resources/js/retina.min.js"></script>
+		<!-- Retina Plugin -->
+		<script src="/resources/js/retina.min.js"></script>
 
-	<!-- ScrollReveal Plugin -->
-	<script src="/resources/js/scrollReveal.min.js"></script>
+		<!-- ScrollReveal Plugin -->
+		<script src="/resources/js/scrollReveal.min.js"></script>
 
-	<!-- Flex Menu Plugin -->
-	<script src="/resources/js/jquery.flexmenu.js"></script>
+		<!-- Flex Menu Plugin -->
+		<script src="/resources/js/jquery.flexmenu.js"></script>
 
-	<!-- Slider Plugin -->
-	<script src="/resources/js/jquery.ba-cond.min.js"></script>
-	<script src="/resources/js/jquery.slitslider.js"></script>
+		<!-- Slider Plugin -->
+		<script src="/resources/js/jquery.ba-cond.min.js"></script>
+		<script src="/resources/js/jquery.slitslider.js"></script>
 
-	<!-- Carousel Plugin -->
-	<script src="/resources/js/owl.carousel.min.js"></script>
+		<!-- Carousel Plugin -->
+		<script src="/resources/js/owl.carousel.min.js"></script>
 
-	<!-- Parallax Plugin -->
-	<script src="/resources/js/parallax.js"></script>
+		<!-- Parallax Plugin -->
+		<script src="/resources/js/parallax.js"></script>
 
-	<!-- Counterup Plugin -->
-	<script src="/resources/js/jquery.counterup.min.js"></script>
-	<script src="/resources/js/waypoints.min.js"></script>
+		<!-- Counterup Plugin -->
+		<script src="/resources/js/jquery.counterup.min.js"></script>
+		<script src="/resources/js/waypoints.min.js"></script>
 
-	<!-- No UI Slider Plugin -->
-	<script src="/resources/js/jquery.nouislider.all.min.js"></script>
+		<!-- No UI Slider Plugin -->
+		<script src="/resources/js/jquery.nouislider.all.min.js"></script>
 
-	<!-- Bootstrap Wysiwyg Plugin -->
-	<script src="/resources/js/bootstrap3-wysihtml5.all.min.js"></script>
+		<!-- Bootstrap Wysiwyg Plugin -->
+		<script src="/resources/js/bootstrap3-wysihtml5.all.min.js"></script>
 
-	<!-- Flickr Plugin -->
-	<script src="/resources/js/jflickrfeed.min.js"></script>
+		<!-- Flickr Plugin -->
+		<script src="/resources/js/jflickrfeed.min.js"></script>
 
-	<!-- Fancybox Plugin -->
-	<script src="/resources/js/fancybox.pack.js"></script>
+		<!-- Fancybox Plugin -->
+		<script src="/resources/js/fancybox.pack.js"></script>
 
-	<!-- Magic Form Processing -->
-	<script src="/resources/js/magic.js"></script>
+		<!-- Magic Form Processing -->
+		<script src="/resources/js/magic.js"></script>
 
-	<!-- jQuery Settings -->
-	<script src="/resources/js/settings.js"></script>
+		<!-- jQuery Settings -->
+		<script src="/resources/js/settings.js"></script>
 
-	<!-- Slick plugin -->
-	
-	
-<script type="text/javascript" src="/resources/plugins/slick/slick.min.js"></script>
+		<!-- Slick plugin -->
 
-<script>
+		<script type="text/javascript" src="/resources/plugins/slick/slick.min.js"></script>
 
-$('.onecikanlar').slick({
-  dots: true,
-  infinite: false,
-  rows: 2,
-  slidesPerRow: 4,
-  speed: 300,
-  
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ]
-});
+		<script>
+			$('.onecikanlar').slick({
+				dots : true,
+				infinite : false,
+				rows : 2,
+				slidesPerRow : 4,
+				speed : 300,
 
-</script>
-	
-	
+				slidesToScroll : 1,
+				responsive : [{
+					breakpoint : 1024,
+					settings : {
+						slidesToShow : 3,
+						slidesToScroll : 3,
+						infinite : true,
+						dots : true
+					}
+				}, {
+					breakpoint : 600,
+					settings : {
+						slidesToShow : 2,
+						slidesToScroll : 2
+					}
+				}, {
+					breakpoint : 480,
+					settings : {
+						slidesToShow : 1,
+						slidesToScroll : 1
+					}
+				}
+				// You can unslick at a given breakpoint now by adding:
+				// settings: "unslick"
+				// instead of a settings object
+				]
+			});
+
+		</script>
 
 	</body>
 </html>
