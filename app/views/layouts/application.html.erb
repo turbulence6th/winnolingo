@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +10,6 @@
 		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
 		<title>Jobseek - Job Board Responsive HTML Template</title>
 		<link rel="shortcut icon" href="/resources/images/favicon.png">
-
-		<!-- Main Stylesheet -->
-		<link href="/resources/css/style.css" rel="stylesheet">
-
-		<!-- Slick plugin -->
-
-		<link rel="stylesheet" type="text/css" href="/resources/plugins/slick/slick.css"/>
-
-		<link rel="stylesheet" type="text/css" href="/resources/plugins/slick/slick-theme.css"/>
-
-		<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="/resources/js/html5shiv.js"></script>
-		<script src="/resources/js/respond.min.js"></script>
-		<![endif]-->
-
 	</head>
 
 	<body id = "<%= @viewID %>">
@@ -126,7 +110,7 @@
 					<a class="close"><i class="fa fa-remove fa-lg"></i></a>
 					<h2>Register</h2>
 				</div>
-				<form>
+				<%= form_for User.new, :remote => true do |t| %>
 					<ul class="social-login">
 						<li>
 							<a class="btn btn-facebook"><i class="fa fa-facebook"></i>Register with Facebook</a>
@@ -141,91 +125,39 @@
 					<hr>
 					<div class="form-group">
 						<label for="register-name">Name</label>
-						<input type="text" class="form-control" id="register-name">
+						<%= t.text_field :name, :class => 'form-control', :id => 'register-name' %>
 					</div>
 					<div class="form-group">
 						<label for="register-surname">Surname</label>
-						<input type="text" class="form-control" id="register-surname">
+						<%= t.text_field :surname, :class => 'form-control', :id => 'register-surname' %>
 					</div>
 					<div class="form-group">
 						<label for="register-email">Email</label>
-						<input type="email" class="form-control" id="register-email">
+						<%= t.email_field :email, :class => 'form-control', :id => 'register-email' %>
 					</div>
 					<hr>
 					<div class="form-group">
 						<label for="register-username">Username</label>
-						<input type="text" class="form-control" id="register-username">
+						<%= t.text_field :username, :class => 'form-control', :id => 'register-username' %>
 					</div>
 					<div class="form-group">
 						<label for="register-password1">Password</label>
-						<input type="password" class="form-control" id="register-password1">
+						<%= t.password_field :password, :class => 'form-control', :id => 'register-password1' %>
 					</div>
 					<div class="form-group">
 						<label for="register-password2">Repeat Password</label>
-						<input type="password" class="form-control" id="register-password2">
+						<%= t.password_field :password_confirmation, :class => 'form-control', :id => 'register-password2' %>
 					</div>
 					<button type="submit" class="btn btn-primary">
 						Register
 					</button>
-				</form>
+				<% end %>
 			</div>
 		</div>
 
 		<!-- ============ REGISTER END ============ -->
-
-		<!-- Modernizr Plugin -->
-		<script src="/resources/js/modernizr.custom.79639.js"></script>
-
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="/resources/js/jquery-1.11.2.min.js"></script>
-
-		<!-- Bootstrap Plugins -->
-		<script src="/resources/js/bootstrap.min.js"></script>
-
-		<!-- Retina Plugin -->
-		<script src="/resources/js/retina.min.js"></script>
-
-		<!-- ScrollReveal Plugin -->
-		<script src="/resources/js/scrollReveal.min.js"></script>
-
-		<!-- Flex Menu Plugin -->
-		<script src="/resources/js/jquery.flexmenu.js"></script>
-
-		<!-- Slider Plugin -->
-		<script src="/resources/js/jquery.ba-cond.min.js"></script>
-		<script src="/resources/js/jquery.slitslider.js"></script>
-
-		<!-- Carousel Plugin -->
-		<script src="/resources/js/owl.carousel.min.js"></script>
-
-		<!-- Parallax Plugin -->
-		<script src="/resources/js/parallax.js"></script>
-
-		<!-- Counterup Plugin -->
-		<script src="/resources/js/jquery.counterup.min.js"></script>
-		<script src="/resources/js/waypoints.min.js"></script>
-
-		<!-- No UI Slider Plugin -->
-		<script src="/resources/js/jquery.nouislider.all.min.js"></script>
-
-		<!-- Bootstrap Wysiwyg Plugin -->
-		<script src="/resources/js/bootstrap3-wysihtml5.all.min.js"></script>
-
-		<!-- Flickr Plugin -->
-		<script src="/resources/js/jflickrfeed.min.js"></script>
-
-		<!-- Fancybox Plugin -->
-		<script src="/resources/js/fancybox.pack.js"></script>
-
-		<!-- Magic Form Processing -->
-		<script src="/resources/js/magic.js"></script>
-
-		<!-- jQuery Settings -->
-		<script src="/resources/js/settings.js"></script>
-
-		<!-- Slick plugin -->
-
-		<script type="text/javascript" src="/resources/plugins/slick/slick.min.js"></script>
+		
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
 		<script>
 			$('.onecikanlar').slick({
@@ -262,7 +194,14 @@
 				// instead of a settings object
 				]
 			});
+			
+			$(document).ready(function(){
+			    $('#new_user').on('ajax:success',function(e, data, status, xhr){
+			      alert(data);
+			    }).on('ajax:error',function(e, xhr, status, error){
+			      alert(data);
+			    });
+			  });
 		</script>
-
 	</body>
 </html>
