@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218230603) do
+ActiveRecord::Schema.define(version: 20160616231553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,22 +27,28 @@ ActiveRecord::Schema.define(version: 20160218230603) do
     t.string "name"
   end
 
+  create_table "request_languages", force: :cascade do |t|
+    t.integer "request_id"
+    t.integer "language_id"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "category"
-    t.string   "description"
-    t.date     "deadLine"
-    t.boolean  "showSuggestions"
-    t.integer  "onVote"
-    t.boolean  "active"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.string   "award"
+    t.integer  "request_language_id"
+    t.boolean  "privacy"
+    t.text     "description"
+    t.datetime "last_date"
+    t.boolean  "extra_request"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "suggestions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "request_id"
-    t.integer  "reserve"
     t.string   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,29 +65,30 @@ ActiveRecord::Schema.define(version: 20160218230603) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "email"
+    t.uuid     "email_token"
     t.string   "password_digest"
     t.string   "name"
-    t.string   "surname"
     t.integer  "gender"
     t.date     "birthday"
     t.text     "address"
-    t.string   "email"
-    t.string   "email_token"
     t.string   "mobile"
-    t.string   "mobile_token"
-    t.boolean  "showFollowings"
-    t.boolean  "showFollowers"
-    t.integer  "role"
+    t.uuid     "mobile_token"
+    t.boolean  "show_followings", default: true
+    t.boolean  "show_followers",  default: true
+    t.integer  "role",            default: 2
+    t.integer  "account_type"
     t.boolean  "bulletin"
-    t.string   "facebookID"
+    t.string   "facebook_id"
+    t.string   "google_id"
+    t.string   "twitter_id"
     t.boolean  "verified"
     t.boolean  "deleted"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+  add_index "users", ["mobile"], name: "index_users_on_mobile", using: :btree
 
 end

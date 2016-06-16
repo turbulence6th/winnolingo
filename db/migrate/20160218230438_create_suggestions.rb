@@ -4,10 +4,9 @@ class CreateSuggestions < ActiveRecord::Migration
       t.references :user
       t.references :request
       
-      t.integer :reserve
       t.string :text
 
-      t.timestamps null: false
+      t.timestamps :null => false
     end
   end
 end

@@ -4,7 +4,7 @@ class CreateFollows < ActiveRecord::Migration
       t.references :follower, :references => :user
       t.references :followed, :references => :user
       
-      t.timestamps null: false
+      t.timestamps :null => false
     end
   end
 end

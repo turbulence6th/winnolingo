@@ -9,22 +9,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.json {
-          render :json => {
-            :success => true
-          }
-        }
-      else
-        format.json {
-          render :json => {
-            :success => false,
-            :errors => @user.errors
-          }
-        }
-      end
+    @user.email_token = SecureRandom.uuid
+    if @user.save
+      redirect_to view_context.url_for(@user)
+    else
+      render :new
     end
   end
 
@@ -33,8 +22,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :username,
-    :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password)
   end
 
 end

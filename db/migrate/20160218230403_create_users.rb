@@ -1,30 +1,32 @@
 class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :users do |t|
-      t.string :username, :index => true
+    create_table :users do |t| 
+      t.string :email, :index => true
+      t.uuid :email_token
+      
       t.string :password_digest
       
       t.string :name
-      t.string :surname
       t.integer :gender
       t.date :birthday
       t.text :address
       
-      t.string :email, :index => true
-      t.string :email_token
+      t.string :mobile, :index => true
+      t.uuid :mobile_token
       
-      t.string :mobile
-      t.string :mobile_token
+      t.boolean :show_followings, :default => :true
+      t.boolean :show_followers, :default => :true
       
-      t.boolean :showFollowings
-      t.boolean :showFollowers
-      
-      t.integer :role
+      t.integer :role, :default => User.roles[:member]
+      t.integer :account_type
       t.boolean :bulletin
-      t.string :facebookID  
-      t.boolean :verified
       
-      t.boolean :deleted
+      t.string :facebook_id
+      t.string :google_id
+      t.string :twitter_id
+      
+      t.boolean :verified, :default => false
+      t.boolean :deleted, :default => false
 
       t.timestamps :null => false
     end

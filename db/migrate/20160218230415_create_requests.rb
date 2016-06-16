@@ -4,18 +4,17 @@ class CreateRequests < ActiveRecord::Migration
       t.references :user
       
       t.integer :category
-      t.string :description
+      t.string :name
+      t.string :award
       
-      #award_type
-      #award_amount
+      t.references :request_language
       
-      t.date :deadLine
-      t.boolean :showSuggestions
-      t.integer :onVote
+      t.boolean :privacy
+      t.text :description
+      t.datetime :last_date
+      t.boolean :extra_request
       
-      t.boolean :active
-
-      t.timestamps null: false
+      t.timestamps :null => false
     end
   end
 end

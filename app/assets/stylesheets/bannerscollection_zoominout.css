@@ -1363,7 +1363,7 @@ skins available:
 }
 .textElement22_generous {
 	font: bold 14px 'Droid Sans', Verdana, Helvetica, sans-serif;
-	line-height: 20px
+	line-height: 20px;
 	text-transform:uppercase;
 	color:#FFFFFF;
 }
@@ -1980,7 +1980,7 @@ skins available:
 }
 .textElement32_MiniGallery1 {
 	font: bold 14px 'Droid Sans', Verdana, Helvetica, sans-serif;
-	line-height: 22px
+	line-height: 22px;
 	text-transform:uppercase;
 	color:#FFFFFF;
 }

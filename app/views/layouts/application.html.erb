@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,25 +129,13 @@
 						<%= t.text_field :name, :class => 'form-control', :id => 'register-name' %>
 					</div>
 					<div class="form-group">
-						<label for="register-surname">Surname</label>
-						<%= t.text_field :surname, :class => 'form-control', :id => 'register-surname' %>
-					</div>
-					<div class="form-group">
 						<label for="register-email">Email</label>
 						<%= t.email_field :email, :class => 'form-control', :id => 'register-email' %>
 					</div>
 					<hr>
 					<div class="form-group">
-						<label for="register-username">Username</label>
-						<%= t.text_field :username, :class => 'form-control', :id => 'register-username' %>
-					</div>
-					<div class="form-group">
 						<label for="register-password1">Password</label>
 						<%= t.password_field :password, :class => 'form-control', :id => 'register-password1' %>
-					</div>
-					<div class="form-group">
-						<label for="register-password2">Repeat Password</label>
-						<%= t.password_field :password_confirmation, :class => 'form-control', :id => 'register-password2' %>
 					</div>
 					<button type="submit" class="btn btn-primary">
 						Register
@@ -157,8 +146,6 @@
 
 		<!-- ============ REGISTER END ============ -->
 		
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-
 		<script>
 			$('.onecikanlar').slick({
 				dots : true,
@@ -194,14 +181,7 @@
 				// instead of a settings object
 				]
 			});
-			
-			$(document).ready(function(){
-			    $('#new_user').on('ajax:success',function(e, data, status, xhr){
-			      alert(data);
-			    }).on('ajax:error',function(e, xhr, status, error){
-			      alert(data);
-			    });
-			  });
+
 		</script>
 	</body>
 </html>
