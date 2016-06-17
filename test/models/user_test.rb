@@ -6,6 +6,19 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new
   end
   
+  #Name test cases
+  test "name" do
+    @user.name = "Oğuz Tanrıkulu"
+    @user.valid?
+    assert @user.errors[:name] == [], @user.errors[:name]
+  end
+  
+  test "name_invalid" do
+    @user.name = "0ğuz T4nr1kulu"
+    @user.valid?
+    assert @user.errors[:name] != []
+  end
+  
   #Password test cases
   test "password" do
     @user.password = "oguzTanrikulu123"
@@ -36,6 +49,19 @@ class UserTest < ActiveSupport::TestCase
     @user.email = "oguz.tanrikulu@metu.edu.tr"
     @user.valid?
     assert @user.errors[:email] != []
+  end
+  
+  #Kind test cases
+  test "kind_real_person" do
+    @user.account_type = "male"
+    @user.valid?
+    assert @user.kind == :real_person, @user.kind
+  end
+  
+  test "kind_legal_person" do
+    @user.account_type = "public_institution"
+    @user.valid?
+    assert @user.kind == :legal_person, @user.kind
   end
   
 end

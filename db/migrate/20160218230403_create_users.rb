@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       
       t.string :name
-      t.integer :gender
+      t.integer :account_type
       t.date :birthday
       t.text :address
       
@@ -18,8 +18,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :show_followers, :default => :true
       
       t.integer :role, :default => User.roles[:member]
-      t.integer :account_type
-      t.boolean :bulletin
+      t.boolean :bulletin, :default => :true
       
       t.string :facebook_id
       t.string :google_id

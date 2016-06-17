@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
-  resources :users, :path => '/'
+  resources :users
 
-  resources :users, :path => '/' do
+  resources :users do
     resources :requests
     resources :suggestions
   end

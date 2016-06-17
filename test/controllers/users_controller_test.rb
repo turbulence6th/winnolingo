@@ -5,14 +5,14 @@ class UsersControllerTest < ActionController::TestCase
   #Register test cases
   test "register" do
     post(:create, { :user => { :name => "Oguz", :email => "turbulence6th@gmail.com", 
-      :password => "oguzTanrikulu" } })
+      :password => "oguzTanrikulu", :account_type => "male" } })
     user = User.find_by(:email => "turbulence6th@gmail.com")
-    assert_redirected_to user_path(user)
+    assert_redirected_to "/"
   end
   
   test "register_invalid" do
     post(:create, { :user => { :name => "Oguz2", :email => "turbulence6th@gmail.com", 
-      :password => "oguzTanrikulu" } })
+      :password => "oguzTanrikulu", :account_type => "male" } })
     user = User.find_by(:email => "turbulence6th@gmail.com")
     assert_template :new
   end

@@ -7,24 +7,28 @@ class User < ActiveRecord::Base
   
   has_many :userLanguages, :dependent => :destroy
   
-  has_many :followers, :class_name => 'Follow', :foreign_key => 'follower_id', :dependent => :destroy
-  has_many :followeds, :class_name => 'Follow', :foreign_key => 'followed_id', :dependent => :destroy
+  has_many :followers, :class_name => 'Follow', :foreign_key => 'followed_id', :dependent => :destroy
+  has_many :followeds, :class_name => 'Follow', :foreign_key => 'follower_id', :dependent => :destroy
   
   enum :role => {
     :admin => 0,
-    :moderator => 1,
-    :member => 2
+    :member => 1
   }
   
   enum :account_type => {
-    :realPerson => 0,
-    :corporation => 1
+    :male => 0,
+    :female => 1,
+    :company => 2,
+    :public_institution => 3,
+    :foundatition => 4,
+    :non_profit_organisation => 5,
+    :educational_institution => 6
   }
   
   validates :name, :presence => {
     :message => "Lütfen ad soyad / ünvan giriniz."
   }, :format => {
-    :with => /\A[a-zA-Z]*\z/,
+    :with => /\A[a-zA-Z\u00c7\u00e7\u011e\u011f\u0130\u0131\u00d6\u00f6\u015e\u015f\u00dc\u00fc ]*\z/,
     :message => "Sadece harf içerebilir."
   }, :length => {
     :minimum => 1,
@@ -57,9 +61,22 @@ class User < ActiveRecord::Base
     |object| !if_social_exists(object)
   }
   
+  validates :account_type, :presence => {
+    :message => "Bişiy seç"
+  }
+  
   private
   def if_social_exists(object)
     object.facebook_id.present? || object.google_id.present? || object.twitter_id.present?
+  end
+  
+  public
+  def kind
+    if self.account_type == 'male' || self.account_type == 'female'
+      :real_person
+    else
+      :legal_person
+    end
   end
   
 end
