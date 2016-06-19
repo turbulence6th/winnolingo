@@ -5,6 +5,7 @@ class CreateSuggestions < ActiveRecord::Migration
       t.references :request
       
       t.string :text
+      t.boolean :successful, :default => false
 
       t.timestamps :null => false
     end

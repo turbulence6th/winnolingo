@@ -3,8 +3,15 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def login(email, password)
+    old_controller = @controller
+    @controller = UsersController.new 
+
+    post(:login, { :email => email, :password => password, :session => {
+      :device_type => "browser", :device_id => SecureRandom.uuid, :push_token => SecureRandom.uuid }})
+
+    @controller = old_controller
+  end
 end

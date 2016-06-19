@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+  
+  ActiveAdmin.routes(self)
 
-  root 'index#index'
-
-  resources :users
+  resources :index, :path => "/" do
+    post "login", :to => "users#login", :on => :collection
+    get "verify_email", :to => "users#verify_email", :on => :collection
+  end
+  
+  resources :requests
 
   resources :users do
-    resources :requests
     resources :suggestions
   end
 

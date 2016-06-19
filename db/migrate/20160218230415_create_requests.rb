@@ -7,12 +7,10 @@ class CreateRequests < ActiveRecord::Migration
       t.string :name
       t.string :award
       
-      t.references :request_language
-      
-      t.boolean :privacy
+      t.boolean :privacy, :default => false
       t.text :description
       t.datetime :last_date
-      t.boolean :extra_request
+      t.boolean :extra_request, :default => false
       
       t.timestamps :null => false
     end

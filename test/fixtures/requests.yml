@@ -1,11 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one: {
+  id: 1,
+  user_id: 1,
+  category: 0,
+  name: T-shirt Sloganı,
+  award: Takım imzalı forma,
+  privacy: false,
+  description: Klubümüz için yeni slogan arıyoruz. En iyi teklife forma verilecektir.,
+  last_date: 2016-10-10,
+  extra_request: false
+}
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+two: {
+  
+}

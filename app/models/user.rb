@@ -6,9 +6,12 @@ class User < ActiveRecord::Base
   has_many :suggestions, :dependent => :destroy
   
   has_many :userLanguages, :dependent => :destroy
+  has_many :languages, :through => :userLanguages
   
   has_many :followers, :class_name => 'Follow', :foreign_key => 'followed_id', :dependent => :destroy
   has_many :followeds, :class_name => 'Follow', :foreign_key => 'follower_id', :dependent => :destroy
+  
+  has_many :sessions
   
   enum :role => {
     :admin => 0,
@@ -44,9 +47,7 @@ class User < ActiveRecord::Base
   }, :uniqueness => { 
     :case_sensitive => false,
     :message => "Seçtiğiniz e-posta adresi zaten kullanılıyor."
-  }, :if => lambda { 
-    |object| !if_social_exists(object)
-  }
+  }, :if => :email_changed?
   
   validates :password, :presence => {
     :message => "Lütfen şifre giriniz."
@@ -57,25 +58,44 @@ class User < ActiveRecord::Base
     :minimum => 6,
     :maximum => 30,
     :message => "Lütfen 6 ve 30 karakter arasında uzunluğa sahip bir şifre kullanın."
-  }, :if => lambda { 
-    |object| !if_social_exists(object)
-  }
+  }, :if => :password_digest_changed?
   
   validates :account_type, :presence => {
-    :message => "Bişiy seç"
+    :message => "Hesap tipi seçiniz."
   }
   
-  private
-  def if_social_exists(object)
-    object.facebook_id.present? || object.google_id.present? || object.twitter_id.present?
+  public
+  def if_social_exists
+    self.facebook_id.present? || self.google_id.present? || self.twitter_id.present?
   end
   
-  public
   def kind
     if self.account_type == 'male' || self.account_type == 'female'
       :real_person
     else
       :legal_person
+    end
+  end
+  
+  def user_types
+    titles = []
+    successful_suggestions = self.suggestions.where(:succesful => true).count
+    if successful_suggestions >= 50
+      titles << {:name => "Linguru", :points => successful_suggestions}
+    end
+    
+    created_requests = self.requests.count
+    if self.account_type == User.account_types[:company] && created_requests >= 1
+      titles << {:name => "Müşteri Odaklı Şirket", :points => created_requests}
+    elsif (self.account_type == User.account_types[:public_institution] || 
+        self.account_type == User.account_types[:foundatition] ||
+        self.account_type == User.account_types[:non_profit_organisation] ||
+        self.account_type == User.account_types[:educational_institution]) && 
+        created_requests >= 1
+      titles << {:name => "Kamuoyu Odaklı Kurum", :points => created_requests}
+    elsif (self.account_type == User.account_types[:male] ||
+        self.account_type == User.account_types[:female]) && created_requests >= 1
+      titles << {:name => "Yeni Fikirlere İlgi Duyuyor", :points => created_requests}
     end
   end
   

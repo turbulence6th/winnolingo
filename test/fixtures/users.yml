@@ -1,7 +1,22 @@
 one: {
+  id: 1,
   password_digest: <%= BCrypt::Password.create('oguzTanrikulu123') %>,
-  email: oguz.tanrikulu@metu.edu.tr
+  email: oguz.tanrikulu@metu.edu.tr,
+  verified: true
 }
 
-two: {}
-#  column: value
+two: {
+  id: 2,
+  password_digest: <%= BCrypt::Password.create('onurDemirtas') %>,
+  email: onur.demirtas@gmail.com,
+  verified: true
+}
+
+three: {
+  id: 3,
+  name: "Onur Ateş",
+  password_digest: <%= BCrypt::Password.create('onurAtes') %>,
+  email: onur.ates@gmail.com,
+  email_token: bddf6e00-3092-4538-8224-ad86786db6b7,
+  account_type: <%= User.account_types[:male] %>
+}

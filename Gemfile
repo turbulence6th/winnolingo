@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate', '~> 3.1.0'
+
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'devise'
+gem 'cancan' # or cancancan
+gem 'draper'
+gem 'pundit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

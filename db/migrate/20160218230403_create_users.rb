@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t| 
       t.string :email, :index => true
-      t.uuid :email_token
+      t.string :email_token
       
       t.string :password_digest
       
@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :address
       
       t.string :mobile, :index => true
-      t.uuid :mobile_token
+      t.string :mobile_token
       
       t.boolean :show_followings, :default => :true
       t.boolean :show_followers, :default => :true
