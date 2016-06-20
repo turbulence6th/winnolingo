@@ -32,7 +32,7 @@ class SuggestionsController < ApplicationController
   
   def show
     @request = Request.valid.find(params[:request_id])
-    @suggestion = @request.suggestions.find(params[:id])
+    @suggestion = @request.suggestions.valid.find(params[:id])
     respond_to do |format|
       format.html {  }
       format.json { render :json => { :suggestion => @suggestion } }
@@ -41,12 +41,12 @@ class SuggestionsController < ApplicationController
   
   def edit
     @request = @current_user.requests.valid.find(params[:request_id])
-    @suggestion = @request.suggestions.find(params[:id])
+    @suggestion = @request.suggestions.valid.find(params[:id])
   end
   
   def update
     @request = @current_user.requests.valid.find(params[:request_id])
-    @suggestion = @request.suggestions.find(params[:id])
+    @suggestion = @request.suggestions.valid.find(params[:id])
     respond_to do |format|
       if @suggestion.update_attributes(suggestion_params_update)
         format.html { redirect_to request_suggestion_path(@request, @suggestion) }

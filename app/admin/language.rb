@@ -3,8 +3,6 @@ ActiveAdmin.register Language do
   
   filter :users
   filter :requests
-  filter :questions
   filter :name
-  
-  
+
 end
