@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20160618203422) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "follows", ["followed_id"], name: "index_follows_on_followed_id", using: :btree
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
   end
@@ -49,23 +52,31 @@ ActiveRecord::Schema.define(version: 20160618203422) do
     t.integer "right_answer_index"
   end
 
+  add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
+
   create_table "request_languages", force: :cascade do |t|
     t.integer "request_id"
     t.integer "language_id"
   end
+
+  add_index "request_languages", ["language_id"], name: "index_request_languages_on_language_id", using: :btree
+  add_index "request_languages", ["request_id"], name: "index_request_languages_on_request_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "category"
     t.string   "name"
     t.string   "award"
-    t.boolean  "privacy"
+    t.boolean  "privacy",       default: false
     t.text     "description"
     t.datetime "last_date"
-    t.boolean  "extra_request"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "extra_request", default: false
+    t.boolean  "deleted",       default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
+
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.integer  "user_id"
@@ -73,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160618203422) do
     t.string   "device_id"
     t.string   "device_type"
     t.string   "push_token"
+    t.string   "language"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -86,19 +98,22 @@ ActiveRecord::Schema.define(version: 20160618203422) do
     t.integer  "user_id"
     t.integer  "request_id"
     t.string   "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "successful", default: false
+    t.boolean  "deleted",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  create_table "swears", force: :cascade do |t|
-    t.integer "language_id"
-    t.string  "text"
-  end
+  add_index "suggestions", ["request_id"], name: "index_suggestions_on_request_id", using: :btree
+  add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
   create_table "user_languages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "language_id"
   end
+
+  add_index "user_languages", ["language_id"], name: "index_user_languages_on_language_id", using: :btree
+  add_index "user_languages", ["user_id"], name: "index_user_languages_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -112,7 +127,6 @@ ActiveRecord::Schema.define(version: 20160618203422) do
     t.string   "mobile_token"
     t.boolean  "show_followings", default: true
     t.boolean  "show_followers",  default: true
-    t.integer  "winno_point",     default: 0
     t.integer  "role",            default: 1
     t.boolean  "bulletin",        default: true
     t.string   "facebook_id"

@@ -1,11 +1,17 @@
 class Session < ActiveRecord::Base
   
-  belongs_to :user
+  after_initialize :after_initialize
+  
+  belongs_to :user 
   
   enum :device_type => {
-    :browser => 0,
-    :android => 1,
-    :ios => 2
+    :android => 0,
+    :ios => 1,
+    :browser => 2
   }
+  
+  def after_initialize
+    self.auth_token = SecureRandom.uuid
+  end
   
 end

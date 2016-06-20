@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   skip_before_filter :require_user, :only => [:create, :login, :verify_email]
   
   def index
-
+    User.valid
   end
 
   def new
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     @user.email_token = SecureRandom.uuid
     
     session = Session.new(session_params)
-    session.auth_token = SecureRandom.uuid
     
     respond_to do |format|
       if @user.save && session.save
@@ -33,7 +32,24 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @user = User.valid.find(params[:id])
+    respond_to do |format|
+      format.html {  }
+      format.json { render :json => { :user => @user.to_json(:include => :languages) } }
+    end
+  end
+  
+  def edit
+    @user = User.valid.find(params[:id])
+  end
+  
+  def update
+    
+  end
+  
+  def destroy
+    @current_user.deleted = true
+    @current_user.save
   end
   
   def login
@@ -55,6 +71,15 @@ class UsersController < ApplicationController
     end
   end
   
+  def logout
+    @session.destroy
+    cookies.delete :auth_token
+    respond_to do |format|
+      format.html { redirect_to "/" }
+      format.json { render :json => { :success => true } }
+    end
+  end
+  
   def verify_email
     @user = User.find_by(:email_token => params[:token])
     respond_to do |format|
@@ -73,7 +98,7 @@ class UsersController < ApplicationController
   end
   
   def set_session_cookie(auth_token)
-    cookies.permanent.signed[:auth_token] = {
+    cookies.signed[:auth_token] = {
       :value => auth_token,
       :httponly => true
     }

@@ -1,5 +1,7 @@
 class Request < ActiveRecord::Base
   
+  scope :valid, -> { where :deleted => false }
+  
   belongs_to :user
   has_many :suggestions, :dependent => :destroy
   has_many :requestLanguages, :dependent => :destroy

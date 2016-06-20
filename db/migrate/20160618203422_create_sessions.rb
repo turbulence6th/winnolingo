@@ -6,6 +6,7 @@ class CreateSessions < ActiveRecord::Migration
       t.string :device_id, :index => true
       t.string :device_type, :index => true
       t.string :push_token
+      t.string :language
       t.timestamps null: false
     end
   end

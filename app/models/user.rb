@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   
+  scope :valid, -> { where :deleted => false }
+  
   has_secure_password
   
   has_many :requests, :dependent => :destroy
@@ -79,7 +81,7 @@ class User < ActiveRecord::Base
   
   def user_types
     titles = []
-    successful_suggestions = self.suggestions.where(:succesful => true).count
+    successful_suggestions = self.suggestions.where(:successful => true).count
     if successful_suggestions >= 50
       titles << {:name => "Linguru", :points => successful_suggestions}
     end
@@ -97,6 +99,8 @@ class User < ActiveRecord::Base
         self.account_type == User.account_types[:female]) && created_requests >= 1
       titles << {:name => "Yeni Fikirlere İlgi Duyuyor", :points => created_requests}
     end
+    
+    titles
   end
   
 end

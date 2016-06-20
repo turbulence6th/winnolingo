@@ -1,7 +1,7 @@
 class CreateRequests < ActiveRecord::Migration
   def change
     create_table :requests do |t|
-      t.references :user
+      t.references :user, :index => true
       
       t.integer :category
       t.string :name
@@ -11,6 +11,8 @@ class CreateRequests < ActiveRecord::Migration
       t.text :description
       t.datetime :last_date
       t.boolean :extra_request, :default => false
+      
+      t.boolean :deleted, :default => false
       
       t.timestamps :null => false
     end

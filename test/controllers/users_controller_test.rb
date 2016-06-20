@@ -30,10 +30,16 @@ class UsersControllerTest < ActionController::TestCase
   
   #Verify login
   test "login" do
-    user = User.find_by(:email => "onur.ates@gmail.com")
-    session_count = user.sessions.count
+    session_count = Session.count
     login "onur.ates@gmail.com", "onurAtes"
-    assert user.sessions.count==session_count+1
-    assert cookies[:auth_token]
+    assert Session.count==session_count+1
+  end
+  
+  #Verify logout
+  test "logout" do
+    login "onur.ates@gmail.com", "onurAtes"
+    session_count = Session.count
+    get(:logout)
+    assert Session.count==session_count-1
   end
 end

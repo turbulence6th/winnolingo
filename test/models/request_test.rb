@@ -9,6 +9,8 @@ class RequestTest < ActiveSupport::TestCase
     @request.valid?
     assert @request.errors[:user] != []
     assert @request.errors[:category] != []
+    assert @request.errors[:name] != []
+    assert @request.errors[:award] != []
   end
   
   #User test cases
