@@ -1,6 +1,13 @@
 class Request < ActiveRecord::Base
   
-  scope :valid, -> { where :deleted => false }
+  scope :valid, -> { 
+    where(:deleted => false)
+  }
+  
+  scope :not_blocked, ->(current_user) {
+    where(Block.where("blocks.blocker_id=? AND " +
+      "blocks.blocked_id=requests.user_id", current_user.id).exists.not) if current_user
+  }
   
   belongs_to :user
   has_many :suggestions, :dependent => :destroy
@@ -15,32 +22,32 @@ class Request < ActiveRecord::Base
   }
   
   validates :user, :presence => {
-    :message => "Talep oluşturmak için oturum açmanız gerekmektedir."
+    :message => I18n.translate("request.user.presence")
   }
   
   validates :category, :presence => {
-    :message => "Lütfen kategori seçiniz."
+    :message => I18n.translate("request.category.presence")
   }
   
   validates :name, :presence => {
-    :message => "Lütfen talep adı giriniz."
+    :message => I18n.translate("request.name.presence")
   }, :length => {
     :minimum => 3,
     :maximum => 50,
-    :message => "Lütfen 3 ve 50 karakter arasında uzunluğa sahip talep adı giriniz."
+    :message => I18n.translate("request.name.length")
   }
   
   validates :award, :presence => {
-    :message => "Lütfen ödül giriniz."
+    :message => I18n.translate("request.award.presence")
   }, :length => {
     :minimum => 3,
     :maximum => 50,
-    :message => "Lütfen 3 ve 50 karakter arasında uzunluğa sahip ödül giriniz."
+    :message => I18n.translate("request.award.length")
   }
   
   validates :description, :length => {
     :maximum => 500,
-    :message => "Lütfen 500 karakterden kısa bir açıklama giriniz."
+    :message => I18n.translate("request.description.length")
   }
   
 end

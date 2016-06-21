@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
   
-  scope :valid, -> { where :deleted => false }
+  scope :valid, -> { 
+    where(:deleted => false)
+  }
+  
+  scope :not_blocked, ->(current_user) {
+    where(Block.where("blocks.blocker_id=? AND " +
+      "blocks.blocked_id=users.id", current_user.id).exists.not) if current_user
+  }
   
   has_secure_password
   
@@ -10,8 +17,17 @@ class User < ActiveRecord::Base
   has_many :userLanguages, :dependent => :destroy
   has_many :languages, :through => :userLanguages
   
-  has_many :followers, :class_name => 'Follow', :foreign_key => 'followed_id', :dependent => :destroy
-  has_many :followeds, :class_name => 'Follow', :foreign_key => 'follower_id', :dependent => :destroy
+  has_many :followers_follow, :class_name => 'Follow', :foreign_key => 'followed_id', :dependent => :destroy
+  has_many :followers, :through => :followers_follow, :source => :follower
+  
+  has_many :followeds_follow, :class_name => 'Follow', :foreign_key => 'follower_id', :dependent => :destroy
+  has_many :followeds, :through => :followeds_follow, :source => :followed
+  
+  has_many :blockers_block, :class_name => 'Block', :foreign_key => 'blocked_id', :dependent => :destroy
+  has_many :blockers, :through => :blockers_block, :source => :blocker
+  
+  has_many :blockeds_block, :class_name => 'Block', :foreign_key => 'blocker_id', :dependent => :destroy
+  has_many :blockeds, :through => :blockeds_block, :source => :blocked
   
   has_many :sessions
   
@@ -31,39 +47,39 @@ class User < ActiveRecord::Base
   }
   
   validates :name, :presence => {
-    :message => "Lütfen ad soyad / ünvan giriniz."
+    :message => I18n.translate("user.name.presence")
   }, :format => {
     :with => /\A[a-zA-Z\u00c7\u00e7\u011e\u011f\u0130\u0131\u00d6\u00f6\u015e\u015f\u00dc\u00fc ]*\z/,
-    :message => "Sadece harf içerebilir."
+    :message => I18n.translate("user.name.format")
   }, :length => {
     :minimum => 1,
     :maximum => 30,
-    :message => "Lütfen 1 ve 30 karakter arasında bir ad soyad / ünvan kullanın."
+    :message => I18n.translate("user.name.length")
   }
   
   validates :email, :presence => {
-    :message => "Lütfen e-posta giriniz."
+    :message => I18n.translate("user.email.presence")
   }, :format => {
     :with => /\A[a-zA-Z0-9.]*@[a-zA-Z0-9.]*\z/,
-    :message => "Lütfen geçerli bir e-posta giriniz."
+    :message => I18n.translate("user.email.format")
   }, :uniqueness => { 
     :case_sensitive => false,
-    :message => "Seçtiğiniz e-posta adresi zaten kullanılıyor."
+    :message => I18n.translate("user.email.uniqueness")
   }, :if => :email_changed?
   
   validates :password, :presence => {
-    :message => "Lütfen şifre giriniz."
+    :message => I18n.translate("user.password.presence")
   }, :format => {
     :with => /\A[a-zA-Z0-9_-]*\z/,
-    :message => "Şifrenizde şunları kullanabilirsiniz: (a-z), (A-Z), rakamları ve - _ işaretlerini."
+    :message => I18n.translate("user.password.format")
   }, :length => {
     :minimum => 6,
     :maximum => 30,
-    :message => "Lütfen 6 ve 30 karakter arasında uzunluğa sahip bir şifre kullanın."
+    :message => I18n.translate("user.password.length")
   }, :if => :password_digest_changed?
   
   validates :account_type, :presence => {
-    :message => "Hesap tipi seçiniz."
+    :message => I18n.translate("user.account_type.presence")
   }
   
   public

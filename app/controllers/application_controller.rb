@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
   end
   
   def set_locale
-    I18n.locale = @session ? @session.language : I18n.default_locale
+    if @session && LANGUAGES.include?(@session.language)
+      I18n.locale = @session.language
+    end
   end
   
   def authenticate_admin_user!
@@ -39,7 +41,6 @@ class ApplicationController < ActionController::Base
     return nil if !@current_user || @current_user.role!='admin' 
     @current_user  
   end 
-  
  
   def top_ten_requests
     Request.valid.joins(:suggestions).group(:id).order("COUNT(requests.id) DESC").limit(10)

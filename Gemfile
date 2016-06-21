@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rails-i18n'
+
 gem 'will_paginate', '~> 3.1.0'
 
 gem 'activeadmin'

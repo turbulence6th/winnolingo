@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   skip_before_filter :require_user, :only => [:create, :login, :verify_email]
   
   def index
-    User.valid
+    @users = User.valid.not_blocked(@current_user)
+    respond_to do |format|
+      format.html {  }
+      format.json { render :json => { :users => @users}.to_json(:include => :languages) }
+    end
   end
 
   def new
@@ -32,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.valid.find(params[:id])
+    @user = User.valid.not_blocked(@current_user).find(params[:id])
     respond_to do |format|
       format.html {  }
       format.json { render :json => { :user => @user.to_json(:include => :languages) } }
@@ -40,7 +44,7 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.valid.find(params[:id])
+    
   end
   
   def update
@@ -110,7 +114,7 @@ class UsersController < ApplicationController
   end
   
   def session_params
-    params.require(:session).permit(:device_type, :device_id, :push_token)
+    params.require(:session).permit(:device_type, :device_id, :push_token, :language)
   end
 
 end

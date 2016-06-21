@@ -1,2 +1,73 @@
 tr:
-  hello: "merhaba dünya"
+  user:
+    name:
+      presence: "Lütfen ad soyad / ünvan giriniz."
+      format: "Sadece harf içerebilir."
+      length: "Lütfen 1 ve 30 karakter arasında bir ad soyad / ünvan kullanın."
+    
+    email:
+      presence: "Lütfen e-posta giriniz."
+      format: "Lütfen geçerli bir e-posta giriniz."
+      uniqueness: "Seçtiğiniz e-posta adresi zaten kullanılıyor."
+    
+    password:
+      presence: "Lütfen şifre giriniz."
+      format: "Şifrenizde şunları kullanabilirsiniz: (a-z), (A-Z), rakamları ve - _ işaretlerini."
+      length: "Lütfen 6 ve 30 karakter arasında uzunluğa sahip bir şifre kullanın."
+    
+    account_type:
+      presence: "Hesap tipi seçiniz."
+      male: "Erkek"
+      female: "Kadın"
+      company: "Şirket"
+      public_institution: "Kamu Kurumu"
+      foundatition: "Vakıf"
+      non_profit_organisation: "STK"
+      educational_institution: "Eğitim Kurumu"
+      
+  request:
+    category:
+      presence: "Lütfen kategori seçiniz."
+      names: {
+        Ticari: "commercial",
+        Sosyal: "social",
+        Sanatsal: "art",
+        Bilimsel: "scientific"
+      }
+   
+    user:
+      presence: "Talep oluşturmak için oturum açmanız gerekmektedir."
+   
+    name:
+      presence: "Lütfen talep adı giriniz."
+      length: "Lütfen 3 ve 50 karakter arasında uzunluğa sahip talep adı giriniz."
+     
+    award:
+      presence: "Lütfen ödül giriniz."
+      length: "Lütfen 3 ve 50 karakter arasında uzunluğa sahip ödül giriniz."
+     
+    description:
+      length: "Lütfen 500 karakterden kısa bir açıklama giriniz."
+  
+  suggestion:
+    user:
+      presence: "Öneride bulunmak için oturum açmanız gerekmektedir."
+    
+    request:
+      presence: "Yaptığınız öneriye ait talep bulunamadı."
+      own: "Kendi talebinize öneride bulunamazsınız."
+      count: "Talebe en fazla 5 öneride bulunabilirsiniz."
+    
+    text:
+      presence: "Öneri yapmak zorundasınız."
+      length: "Öneriniz en fazla 100 karakterden oluşabilir."
+      uniqueness: "Göndermek istediğiniz öneri daha önce bir başka kullanıcı tarafından önerildi."
+      
+  follow:
+    follower:
+      presence: "Takip etmek için oturum açınız."
+      
+    followed:
+      presence: "Takip edilecek kişi bulunamadı."
+      uniqueness: "Kullanıcıyı zaten takip ediyorsunuz."
+      self: "Kendi kendinizi takip edemezsiniz."

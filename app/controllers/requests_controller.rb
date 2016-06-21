@@ -1,10 +1,10 @@
 class RequestsController < ApplicationController
   
   def index
-    @requests = Request.valid
+    @requests = Request.valid.not_blocked(@current_user)
     respond_to do |format|
       format.html {  }
-      format.json { render :json => { :requests => @requests.to_json } }
+      format.json { render :json => { :requests => @requests }.to_json(:include => :languages) }
     end
   end
   
@@ -27,10 +27,10 @@ class RequestsController < ApplicationController
   end
   
   def show
-    @request = Request.valid.find(params[:id])
+    @request = Request.valid.not_blocked(@current_user).find(params[:id])
     respond_to do |format|
       format.html {  }
-      format.json { render :json => { :request => @request.to_json(:include => :languages) } }
+      format.json { render :json => { :request => @request }.to_json(:include => :languages) }
     end
   end
   
