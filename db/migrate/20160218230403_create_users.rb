@@ -14,8 +14,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :mobile, :index => true
       t.string :mobile_token
       
-      t.boolean :show_followings, :default => :true
       t.boolean :show_followers, :default => :true
+      t.boolean :show_followeds, :default => :true
       
       t.integer :role, :default => User.roles[:member]
       t.boolean :bulletin, :default => :true

@@ -18,5 +18,14 @@ three: {
   password_digest: <%= BCrypt::Password.create('onurAtes') %>,
   email: onur.ates@gmail.com,
   email_token: bddf6e00-3092-4538-8224-ad86786db6b7,
-  account_type: <%= User.account_types[:male] %>
+  account_type: <%= User.account_types[:male] %>,
+  verified: true
+}
+
+four: {
+  id: 4,
+  name: "Ramazan Zor",
+  account_type: <%= User.account_types[:male] %>,
+  facebook_id: "11111111111111",
+  verified: true
 }

@@ -17,5 +17,9 @@ Rails.application.routes.draw do
     put :update, :on => :collection
     delete :destroy, :on => :collection
   end
+  
+  resources :blocks, :only => [:index, :create] do
+    delete :destroy, :on => :collection
+  end
 
 end

@@ -77,9 +77,11 @@ class UsersController < ApplicationController
   
   def logout
     @session.destroy
-    cookies.delete :auth_token
     respond_to do |format|
-      format.html { redirect_to "/" }
+      format.html { 
+        cookies.delete :auth_token
+        redirect_to "/"
+      }
       format.json { render :json => { :success => true } }
     end
   end
@@ -87,11 +89,7 @@ class UsersController < ApplicationController
   def verify_email
     @user = User.find_by(:email_token => params[:token])
     respond_to do |format|
-      if @user
-        @user.email_token = nil
-        @user.verified = true
-        @user.save
-        
+      if @user && @user.update_attributes(:email_token => nil, :verified => true)
         format.html { }
         format.json { render :json => { :success => true } }
       else

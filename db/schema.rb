@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160620190926) do
 
   create_table "questions", force: :cascade do |t|
     t.integer "language_id"
-    t.text    "name"
+    t.string  "name"
     t.string  "answers",            array: true
     t.integer "right_answer_index"
   end
@@ -135,8 +135,8 @@ ActiveRecord::Schema.define(version: 20160620190926) do
     t.text     "address"
     t.string   "mobile"
     t.string   "mobile_token"
-    t.boolean  "show_followings", default: true
     t.boolean  "show_followers",  default: true
+    t.boolean  "show_followeds",  default: true
     t.integer  "role",            default: 1
     t.boolean  "bulletin",        default: true
     t.string   "facebook_id"

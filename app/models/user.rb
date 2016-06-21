@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
       "blocks.blocked_id=users.id", current_user.id).exists.not) if current_user
   }
   
-  has_secure_password
-  
   has_many :requests, :dependent => :destroy
   has_many :suggestions, :dependent => :destroy
   
@@ -41,7 +39,7 @@ class User < ActiveRecord::Base
     :female => 1,
     :company => 2,
     :public_institution => 3,
-    :foundatition => 4,
+    :foundation => 4,
     :non_profit_organisation => 5,
     :educational_institution => 6
   }
@@ -59,32 +57,49 @@ class User < ActiveRecord::Base
   
   validates :email, :presence => {
     :message => I18n.translate("user.email.presence")
-  }, :format => {
+  }, :if => "!if_social_exists"
+  
+  validates :email, :format => {
     :with => /\A[a-zA-Z0-9.]*@[a-zA-Z0-9.]*\z/,
     :message => I18n.translate("user.email.format")
   }, :uniqueness => { 
     :case_sensitive => false,
     :message => I18n.translate("user.email.uniqueness")
-  }, :if => :email_changed?
+  }, :if => "email_changed?"
   
-  validates :password, :presence => {
-    :message => I18n.translate("user.password.presence")
-  }, :format => {
+  validate -> {
+    if !password_digest.present?
+      errors.add(:password, I18n.translate("user.password.presence"))
+    end
+  }, :if => "!if_social_exists"
+  
+  validates :password, :format => {
     :with => /\A[a-zA-Z0-9_-]*\z/,
     :message => I18n.translate("user.password.format")
   }, :length => {
     :minimum => 6,
     :maximum => 30,
     :message => I18n.translate("user.password.length")
-  }, :if => :password_digest_changed?
+  }, :if => "password_digest_changed?"
   
   validates :account_type, :presence => {
     :message => I18n.translate("user.account_type.presence")
   }
   
+  attr_accessor :password
+  
+  def password= password
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
+  
   public
   def if_social_exists
     self.facebook_id.present? || self.google_id.present? || self.twitter_id.present?
+  end
+  
+  def authenticate(password)
+    BCrypt::Password.new(self.password_digest) == password
   end
   
   def kind

@@ -17,13 +17,14 @@ tr:
     
     account_type:
       presence: "Hesap tipi seçiniz."
-      male: "Erkek"
-      female: "Kadın"
-      company: "Şirket"
-      public_institution: "Kamu Kurumu"
-      foundatition: "Vakıf"
-      non_profit_organisation: "STK"
-      educational_institution: "Eğitim Kurumu"
+      names: {
+        Erkek: "male",
+        Kadın: "female",
+        Kamu Kurumu: "public_institution",
+        Vakıf: "foundation",
+        STK: "non_profit_organisation",
+        Eğitim Kurumu: "educational_institution"
+      }
       
   request:
     category:

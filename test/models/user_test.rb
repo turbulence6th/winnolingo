@@ -6,6 +6,19 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new
   end
   
+  test "not_exists" do
+    @user.valid?
+    assert @user.errors[:email] != []
+    assert @user.errors[:password] != []
+    assert @user.errors[:name] != []
+    assert @user.errors[:account_type] != []
+    
+    @user.facebook_id = "11111111111111111"
+    @user.valid?
+    assert @user.errors[:email] == [], @user.errors[:email]
+    assert @user.errors[:password] == [], @user.errors[:password]
+  end
+  
   #Name test cases
   test "name" do
     @user.name = "Oğuz Tanrıkulu"

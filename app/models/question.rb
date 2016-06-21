@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   validate :index_in_borders
   
   def index_in_borders
-    if right_answer_index < 0 || answers.size <= right_answer_index
+    if right_answer_index && (right_answer_index < 0 || answers.size <= right_answer_index)
       errors.add(:right_answer_index, "Geçersiz index değeri.")
     end
   end
