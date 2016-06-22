@@ -111,6 +111,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :account_type)
   end
   
+  def user_params_update
+    
+  end
+  
   def session_params
     params.require(:session).permit(:device_type, :device_id, :push_token, :language)
   end

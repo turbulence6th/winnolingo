@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
-  permit_params :email, :email_token, :password, :name, :account_type, :birthday, :address,
-    :mobile, :mobile_token, :show_followers, :show_followeds, :role, :bulletin,
+  permit_params :email, :email_token, :password, :name, :account_type, :birthday,
+    :city, :country, :mobile, :mobile_token, :show_followers, :show_followeds, :role, :bulletin,
     :facebook_id, :google_id, :twitter_id, :verified, :deleted
 
   form do |f|
@@ -11,7 +11,8 @@ ActiveAdmin.register User do
       f.input :name
       f.input :account_type, :as => :select, :collection => User.account_types.keys
       f.input :birthday
-      f.input :address
+      f.input :city
+      f.input :country, :as => :string
       f.input :mobile
       f.input :mobile_token
       f.input :show_followers

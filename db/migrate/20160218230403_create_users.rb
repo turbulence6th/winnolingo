@@ -9,7 +9,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.integer :account_type
       t.date :birthday
-      t.text :address
+      t.string :city
+      t.string :country
       
       t.string :mobile, :index => true
       t.string :mobile_token

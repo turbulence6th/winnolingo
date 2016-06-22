@@ -132,7 +132,8 @@ ActiveRecord::Schema.define(version: 20160620190926) do
     t.string   "name"
     t.integer  "account_type"
     t.date     "birthday"
-    t.text     "address"
+    t.string   "city"
+    t.string   "country"
     t.string   "mobile"
     t.string   "mobile_token"
     t.boolean  "show_followers",  default: true

@@ -1,7 +1,7 @@
 class BlocksController < ApplicationController
   
   def index
-    @blocks = @current_user.blockeds.valid
+    @blocks = @current_user.blockeds.public_params
     respond_to do |format|
       format.html {  }
       format.json { render :json => { :blocks => @blocks }.to_json }
@@ -9,7 +9,7 @@ class BlocksController < ApplicationController
   end
   
   def create
-    @user = User.valid.find(params[:user_id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       if @current_user.blockeds << @user
         format.html { redirect_to(blocks_path) }
@@ -22,7 +22,7 @@ class BlocksController < ApplicationController
   end
   
   def destroy
-    @user = User.valid.find(params[:user_id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       if @current_user.blockeds.delete(@user)
         format.html { redirect_to(blocks_path) }

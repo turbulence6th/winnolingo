@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
       "blocks.blocked_id=users.id", current_user.id).exists.not) if current_user
   }
   
+  scope :public_params, -> {
+    select(:id, :email, :name, :account_type, :birthday, :city, :country,
+      :facebook_id, :google_id, :twitter_id)
+  }
+  
   has_many :requests, :dependent => :destroy
   has_many :suggestions, :dependent => :destroy
   
@@ -93,7 +98,10 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
   
-  public
+  def to_param
+    "#{name.parameterize}-#{id}"
+  end
+  
   def if_social_exists
     self.facebook_id.present? || self.google_id.present? || self.twitter_id.present?
   end
